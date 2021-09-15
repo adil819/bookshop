@@ -25,6 +25,11 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
+//    @GetMapping("/books")
+//    public List<Book> getBookById(@RequestParam Integer page){
+//        return bookService.getBooksPage(1)
+//    }
+
     @GetMapping("/books")
     public List<Book> getBooks(){
         return bookService.getBooks();
