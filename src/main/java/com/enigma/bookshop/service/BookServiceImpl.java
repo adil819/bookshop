@@ -1,6 +1,7 @@
 package com.enigma.bookshop.service;
 
 import com.enigma.bookshop.entity.Book;
+import com.enigma.bookshop.exception.DataNotFoundException;
 import com.enigma.bookshop.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,10 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public Book getBookById(String uuid) {
+        if(!bookRepository.findById(uuid).isPresent()){
+            String message = "Book with uuid " + uuid + " not found";
+            throw new DataNotFoundException(message);
+        }
         return bookRepository.findById(uuid).get();
     }
 

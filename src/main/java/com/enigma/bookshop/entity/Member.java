@@ -1,5 +1,7 @@
 package com.enigma.bookshop.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,8 +9,10 @@ import javax.persistence.*;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(generator = "uuid2")     // utk uuid
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
+    private String uuid;
     private String firstName;
     private String lastName;
     private String email;
@@ -18,8 +22,8 @@ public class Member {
     public Member() {
     }
 
-    public Member(Integer id, String firstName, String lastName, String email, String username, String password) {
-        this.id = id;
+    public Member(String uuid, String firstName, String lastName, String email, String username, String password) {
+        this.uuid = uuid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -27,12 +31,12 @@ public class Member {
         this.password = password;
     }
 
-    public Integer getId() {
-        return id;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getFirstName() {

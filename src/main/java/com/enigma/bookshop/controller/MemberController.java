@@ -12,7 +12,7 @@ public class MemberController {
 
     @Autowired
     MemberService memberService;
-    private Integer id;
+    private String uuid;
 
     @PostMapping("/members")
     public Member createMembers(@RequestBody Member member){
@@ -20,9 +20,9 @@ public class MemberController {
     }
 
     @GetMapping("/members/{id}")
-    public Member getMemberById(@PathVariable Integer id){
-        this.id = id;
-        return memberService.getMemberById(id);
+    public Member getMemberById(@PathVariable String uuid){
+        this.uuid = uuid;
+        return memberService.getMemberById(uuid);
     }
 
     @GetMapping("/members")
@@ -30,14 +30,14 @@ public class MemberController {
         return memberService.getMembers();
     }
 
-    @PutMapping("/members/{id}")
-    public Member updateMember(@PathVariable Integer id, @RequestBody Member member){
-        return memberService.updateMember(id, member);
+    @PutMapping("/members/{uuid}")
+    public Member updateMember(@PathVariable String uuid, @RequestBody Member member){
+        return memberService.updateMember(uuid, member);
     }
 
-    @DeleteMapping("/members/{id}")
-    public void hardDeleteMember(@PathVariable Integer id){
-        memberService.hardDeleteMember(id);
+    @DeleteMapping("/members/{uuid}")
+    public void hardDeleteMember(@PathVariable String uuid){
+        memberService.hardDeleteMember(uuid);
     }
 
 }

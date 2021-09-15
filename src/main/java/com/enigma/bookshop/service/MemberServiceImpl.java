@@ -20,8 +20,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Member getMemberById(Integer id) {
-        return memberRepository.findById(id).get();
+    public Member getMemberById(String uuid) {
+        return memberRepository.findById(uuid).get();
     }
 
     @Override
@@ -30,11 +30,11 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Member updateMember(Integer id, Member member) {
-        Member member_update = memberRepository.findById(id).get();
+    public Member updateMember(String uuid, Member member) {
+        Member member_update = memberRepository.findById(uuid).get();
         if(member_update != null) {
             member_update = member;
-            member_update.setId(id);
+            member_update.setUuid(uuid);
             return memberRepository.save(member);
         } else {
             return null;
@@ -43,8 +43,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public void hardDeleteMember(Integer id) {
-        memberRepository.deleteById(id);
+    public void hardDeleteMember(String uuid) {
+        memberRepository.deleteById(uuid);
     }
 
 }

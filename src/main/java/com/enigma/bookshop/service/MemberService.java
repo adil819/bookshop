@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface MemberService {
     public Member addMember(Member member);
-    public Member getMemberById(Integer id);
+    public Member getMemberById(String uuid);
     public List<Member> getMembers();
-    public Member updateMember(Integer id, Member member);
-    public void hardDeleteMember(Integer id);
+    public Member updateMember(String uuid, Member member);
+    public void hardDeleteMember(String uuid);
 }
