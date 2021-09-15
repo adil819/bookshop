@@ -5,6 +5,8 @@ import com.enigma.bookshop.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookServiceImpl implements BookService{
 
@@ -20,4 +22,28 @@ public class BookServiceImpl implements BookService{
     public Book getBookById(Integer id) {
         return bookRepository.findById(id).get();
     }
+
+    @Override
+    public List<Book> getBooks() {
+        return bookRepository.findAll();
+    }
+
+    @Override
+    public Book updateBook(Integer id, Book book) {
+        Book book_update = bookRepository.findById(id).get();
+        if(book_update != null) {
+            book_update = book;
+            book_update.setId(id);
+            return bookRepository.save(book);
+        } else {
+            return null;
+        }
+
+    }
+
+    @Override
+    public void hardDeleteBook(Integer id) {
+        bookRepository.deleteById(id);
+    }
 }
+

@@ -5,6 +5,8 @@ import com.enigma.bookshop.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class BookController {
 
@@ -21,6 +23,21 @@ public class BookController {
     public Book getBookById(@PathVariable Integer id){
         this.id = id;
         return bookService.getBookById(id);
+    }
+
+    @GetMapping("/books")
+    public List<Book> getBooks(){
+        return bookService.getBooks();
+    }
+
+    @PutMapping("/books/{id}")
+    public Book updateBook(@PathVariable Integer id, @RequestBody Book book){
+        return bookService.updateBook(id, book);
+    }
+
+    @DeleteMapping("/books/{id}")
+    public void hardDeleteBook(@PathVariable Integer id){
+        bookService.hardDeleteBook(id);
     }
 
 }
