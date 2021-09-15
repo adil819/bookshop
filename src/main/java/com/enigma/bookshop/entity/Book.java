@@ -1,18 +1,20 @@
 package com.enigma.bookshop.entity;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "mst_book")
+//@Table(name = "mst_book")
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     // utk id
-//    @GeneratedValue(generator = "uuid2")     // utk uuid
-//    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-//    @Column(columnDefinition = "BINARY(16)")
-    private Integer id;
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)     // utk id
+    @GeneratedValue(generator = "uuid2")     // utk uuid
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
+    private String uuid;
     private String title;
     private String description;
     private String publisher;
@@ -25,8 +27,8 @@ public class Book {
     public Book() {
     }
 
-    public Book(Integer id, String title, String description, String publisher, Integer year, Integer page, String language, Integer stock, Integer price) {
-        this.id = id;
+    public Book(String uuid, String title, String description, String publisher, Integer year, Integer page, String language, Integer stock, Integer price) {
+        this.uuid = uuid;
         this.title = title;
         this.description = description;
         this.publisher = publisher;
@@ -37,12 +39,12 @@ public class Book {
         this.price = price;
     }
 
-    public Integer getId() {
-        return id;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getTitle() {

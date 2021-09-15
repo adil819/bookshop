@@ -21,8 +21,8 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book getBookById(Integer id) {
-        return bookRepository.findById(id).get();
+    public Book getBookById(String uuid) {
+        return bookRepository.findById(uuid).get();
     }
 
     @Override
@@ -31,11 +31,11 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book updateBook(Integer id, Book book) {
-        Book book_update = bookRepository.findById(id).get();
+    public Book updateBook(String uuid, Book book) {
+        Book book_update = bookRepository.findById(uuid).get();
         if(book_update != null) {
             book_update = book;
-            book_update.setId(id);
+            book_update.setUuid(uuid);
             return bookRepository.save(book);
         } else {
             return null;
@@ -44,8 +44,8 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public void hardDeleteBook(Integer id) {
-        bookRepository.deleteById(id);
+    public void hardDeleteBook(String uuid) {
+        bookRepository.deleteById(uuid);
     }
 
     @Override

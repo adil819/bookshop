@@ -14,7 +14,7 @@ public class BookController {
 
     @Autowired
     BookService bookService;
-    private Integer id;
+    private String uuid;
 
     @PostMapping("/books")
     public Book createBook(@RequestBody Book book){
@@ -22,9 +22,9 @@ public class BookController {
     }
 
     @GetMapping("/books/{id}")
-    public Book getBookById(@PathVariable Integer id){
-        this.id = id;
-        return bookService.getBookById(id);
+    public Book getBookById(@PathVariable String uuid){
+        this.uuid = uuid;
+        return bookService.getBookById(uuid);
     }
 
 //    @GetMapping("/books")
@@ -39,19 +39,22 @@ public class BookController {
     @GetMapping("/books")
     public PageResponseWrapper<Book> getBookPerPage(@RequestParam(name="page", defaultValue = "0") Integer page,
                                               @RequestParam(name="size", defaultValue = "3") Integer size){
-        Pageable pageable = PageRequest.of(page,size);
+//                                              @RequestParam(name="sortBy", defaultValue = "title") String direction,
+//                                              @RequestParam(name="direction", defaultValue = "ASC") String sortBy){
+//        Sort sort = Sort.by(Sort.Direction.fromString(direction), sortBy);
+        Pageable pageable = PageRequest.of(page,size);     // tanpa ,sort
         Page<Book> bookPage = bookService.getBookPerPage(pageable);
         return new PageResponseWrapper<>(bookPage);
     }
 
     @PutMapping("/books/{id}")
-    public Book updateBook(@PathVariable Integer id, @RequestBody Book book){
-        return bookService.updateBook(id, book);
+    public Book updateBook(@PathVariable String uuid, @RequestBody Book book){
+        return bookService.updateBook(uuid, book);
     }
 
     @DeleteMapping("/books/{id}")
-    public void hardDeleteBook(@PathVariable Integer id){
-        bookService.hardDeleteBook(id);
+    public void hardDeleteBook(@PathVariable String uuid){
+        bookService.hardDeleteBook(uuid);
     }
 
 }

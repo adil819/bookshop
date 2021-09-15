@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface BookService {
     public Book addBook(Book book);
-    public Book getBookById(Integer id);
+    public Book getBookById(String uuid);
     public List<Book> getBooks();
-    public Book updateBook(Integer id, Book book);
-    public void hardDeleteBook(Integer id);
+    public Book updateBook(String uuid, Book book);
+    public void hardDeleteBook(String uuid);
     public Page<Book> getBookPerPage(Pageable pageable);
 }
