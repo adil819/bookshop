@@ -8,10 +8,10 @@ import javax.persistence.*;
 @Table(name= "mst_member")
 public class Member {
 
-    @Id
     @GeneratedValue(generator = "uuid2")     // utk uuid
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)")
+//    @Column(columnDefinition = "BINARY(32)")
+    @Id
     private String uuid;
     private String firstName;
     private String lastName;
