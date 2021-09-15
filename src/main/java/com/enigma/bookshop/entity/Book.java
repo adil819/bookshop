@@ -8,7 +8,10 @@ import javax.persistence.*;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     // utk id
+//    @GeneratedValue(generator = "uuid2")     // utk uuid
+//    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+//    @Column(columnDefinition = "BINARY(16)")
     private Integer id;
     private String title;
     private String description;

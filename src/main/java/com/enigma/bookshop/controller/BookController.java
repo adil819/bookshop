@@ -2,10 +2,12 @@ package com.enigma.bookshop.controller;
 
 import com.enigma.bookshop.entity.Book;
 import com.enigma.bookshop.service.BookService;
+import com.enigma.bookshop.utils.PageResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class BookController {
@@ -30,9 +32,16 @@ public class BookController {
 //        return bookService.getBooksPage(1)
 //    }
 
+//    @GetMapping("/books")
+//    public List<Book> getBooks(){
+//        return bookService.getBooks();
+//    }
     @GetMapping("/books")
-    public List<Book> getBooks(){
-        return bookService.getBooks();
+    public PageResponseWrapper<Book> getBookPerPage(@RequestParam(name="page", defaultValue = "0") Integer page,
+                                              @RequestParam(name="size", defaultValue = "3") Integer size){
+        Pageable pageable = PageRequest.of(page,size);
+        Page<Book> bookPage = bookService.getBookPerPage(pageable);
+        return new PageResponseWrapper<>(bookPage);
     }
 
     @PutMapping("/books/{id}")
