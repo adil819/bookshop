@@ -1,10 +1,13 @@
 package com.enigma.bookshop.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "trx_purchase")
@@ -23,17 +26,21 @@ public class Purchase {
 
     @ManyToOne
     @JoinColumn(name = "member_id")
-    private Member members;
+    private Member member;
 
     private Double grandTotal;
+
+    @OneToMany(mappedBy = "purchase")
+    @JsonIgnoreProperties("purchase")
+    private List<PurchaseDetail> purchaseDetails = new ArrayList<>();
 
     public Purchase() {
     }
 
-    public Purchase(String id, Date purchaseDate, Member members, Double grandTotal) {
+    public Purchase(String id, Date purchaseDate, Member member, Double grandTotal) {
         this.id = id;
         this.purchaseDate = purchaseDate;
-        this.members = members;
+        this.member = member;
         this.grandTotal = grandTotal;
     }
 
@@ -53,12 +60,12 @@ public class Purchase {
         this.purchaseDate = purchaseDate;
     }
 
-    public Member getMembers() {
-        return members;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMembers(Member members) {
-        this.members = members;
+    public void setMembers(Member member) {
+        this.member = member;
     }
 
     public Double getGrandTotal() {
@@ -67,5 +74,13 @@ public class Purchase {
 
     public void setGrandTotal(Double grandTotal) {
         this.grandTotal = grandTotal;
+    }
+
+    public List<PurchaseDetail> getPurchaseDetails() {
+        return purchaseDetails;
+    }
+
+    public void setPurchaseDetails(List<PurchaseDetail> purchaseDetails) {
+        this.purchaseDetails = purchaseDetails;
     }
 }
