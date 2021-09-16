@@ -14,4 +14,5 @@ public interface BookService {
     public void hardDeleteBook(String uuid);
     public Page<Book> getBookPerPage(Pageable pageable);
     List<Book> searchBookTitle(String title);
-}
+    public List<Book> getBookByYear();
+    }

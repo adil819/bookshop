@@ -65,4 +65,8 @@ public class BookController {
         return bookService.searchBookTitle(title);
     }
 
+    @GetMapping("/year")
+    public List<Book> getBookByYear(){
+        return bookService.getBookByYear();
+    }
 }

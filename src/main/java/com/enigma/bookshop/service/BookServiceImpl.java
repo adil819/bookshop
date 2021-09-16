@@ -62,5 +62,9 @@ public class BookServiceImpl implements BookService{
     public List<Book> searchBookTitle(String title) {
         return bookRepository.findBookByTitleContaining(title);
     }
+
+    public List<Book> getBookByYear(){
+        return bookRepository.findBookByYear();
+    }
 }
 
