@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class BookController {
 
@@ -56,6 +58,11 @@ public class BookController {
     @DeleteMapping("/books/{id}")
     public void hardDeleteBook(@PathVariable String uuid){
         bookService.hardDeleteBook(uuid);
+    }
+
+    @GetMapping("/search")
+    public List<Book> searchBook(@RequestParam String title){
+        return bookService.searchBookTitle(title);
     }
 
 }

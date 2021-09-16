@@ -57,5 +57,10 @@ public class BookServiceImpl implements BookService{
     public Page<Book> getBookPerPage(Pageable pageable){
         return bookRepository.findAll(pageable);
     }
+
+    @Override
+    public List<Book> searchBookTitle(String title) {
+        return bookRepository.findBookByTitleContaining(title);
+    }
 }
 

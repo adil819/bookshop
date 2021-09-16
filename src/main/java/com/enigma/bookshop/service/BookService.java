@@ -13,4 +13,5 @@ public interface BookService {
     public Book updateBook(String uuid, Book book);
     public void hardDeleteBook(String uuid);
     public Page<Book> getBookPerPage(Pageable pageable);
+    List<Book> searchBookTitle(String title);
 }
